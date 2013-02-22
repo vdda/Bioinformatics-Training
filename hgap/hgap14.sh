@@ -20,8 +20,45 @@ usage() {
             "-r    Optional path to a resequencing params file\n"   \
             "-s    Optional path to a celera-assembler spec file\n" \
             "-x    Override default options to smrtpipe\n"          \
-            "-l    Run everything locally (e.g., no cluster)\n"
+            "-l    Run everything locally (e.g., no cluster)\n"     \
+            "-d    Keep all the intermediate files and output\n"    \
+            "      some statistics at the end\n"
     exit 1
+}
+
+cbase() {
+    if gzip -t $1 >& /dev/null
+    then
+        eval $2=$(gunzip -c $1 | perl -ne 'chomp; $l+=length($_) if !/^>/;END{print "$l\n"}')
+    else
+        eval $2=$(fastalength $1 | cut -d' ' -f1 | awk '{t+=$1}END{print t}')
+    fi
+}
+
+n50() {
+    eval $3=$(fastalength $1 | cut -d' ' -f1 | sort -nr | awk -v corrc=$2 '{t+=$1;if (t >= corrc / 2){print $1; exit;}}')
+}
+
+stats() {
+    cbase data/filtered_subreads.fasta rawbc 
+    cbase filtered_longreads.fasta seedc 
+    cbase data/corrected.fasta corrc 
+    cbase data/consensus.fasta.gz asmbc
+    n50 data/corrected.fasta $corrc rfift 
+    nread=$(grep -c '>' data/corrected.fasta)
+    bloss=$(echo "scale=3;1-${corrc}/${seedc}" | bc)
+    mread=$(echo "$corrc / $nread" | bc)
+    ncont=$(gunzip -c data/consensus.fasta.gz | grep -c '>')
+
+    printf "%-15s $rawbc\n" "Raw Bases:"
+    printf "%-15s $seedc\n" "Seed Bases:"
+    printf "%-15s $corrc\n" "Corr Bases:"
+    printf "%-15s $bloss\n" "Base Loss:"
+    printf "%-15s $nread\n" "# reads:"
+    printf "%-15s $mread\n" "Mean Read:"
+    printf "%-15s $rfift\n" "Read N50:"
+    printf "%-15s $ncont\n" "# Contigs:"
+    printf "%-15s $asmbc\n" "Asmbl Bases:"
 }
 
 debug() {
@@ -137,3 +174,4 @@ timeit "CA" "${maybe_qsub} ${RunCA} reads.frg -d assembly -p assembly ${ca_opts}
 ln -s assembly/9-terminator/assembly.scf.fasta reference.fasta
 timeit "Create Reference Repository" "referenceUploader -p. -f reference.fasta -c -n reference"
 timeit "Resequencing" "smrtpipe.py ${x_opts} --params=${p_reseq} xml:${input}" > /dev/null
+[ $DEBUG -eq 1 ] && stats | tee stats.txt

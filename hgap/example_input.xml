@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<pacbioAnalysisInputs>
+  <dataReferences>
+    <url ref="run:0000000-0000"><location>/mnt/data3/vol54/2590603/0001/Analysis_Results/m130112_013624_42139_c000454492559900001500000112311580_s1_p0.bas.h5</location></url>
+    <url ref="run:0000000-0001"><location>/mnt/data3/vol54/2590603/0003/Analysis_Results/m130112_085232_42139_c000454492559900001500000112311582_s1_p0.bas.h5</location></url>
+    <url ref="run:0000000-0002"><location>/mnt/data3/vol54/2590603/0006/Analysis_Results/m130112_193400_42139_c000454492559900001500000112311585_s1_p0.bas.h5</location></url>
+    <url ref="run:0000000-0003"><location>/mnt/data3/vol54/2590603/0009/Analysis_Results/m130113_101713_42139_c000454532559900001500000112311552_s1_p0.bas.h5</location></url>
+  </dataReferences>
+</pacbioAnalysisInputs>

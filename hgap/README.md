@@ -25,6 +25,9 @@ execution.
      -s    Optional path to a celera-assembler spec file
      -x    Override default options to smrtpipe
      -l    Run everything locally (e.g., no cluster)
+     -d    Keep all the intermediate files and output
+           some statistics at the end
+
 
 You must provide an input.xml which lists the base files to include in the    
 analysis.
@@ -38,6 +41,9 @@ the same directory as hgap14.sh, it will be used.
 
 If you do not have access to a cluster or the host is not a submit host, then  
 you may supply the -l flag to run everything locally.
+
+The -d flag will keep some extra files around, but also generate some useful   
+statistics at the end to help you evaluate the finished assembly.
 
 Some success has been achieved by using a newer development versions of runCA   
 than the one we currently ship with (7.0).  The runCA executable called by the   
