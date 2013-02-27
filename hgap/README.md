@@ -16,7 +16,15 @@ Download these to a directory and include it in your PATH environment variable.
 Command Line
 ------------
 Be sure to have your SMRT Pipe installation and environment ready prior to  
-execution.  
+execution.  You first need to set your SEYMOUR_HOME env variable to the root   
+installation of SMRT Analysis, e.g., /opt/smrtanalysis.  Then you must source the  
+environment setup script.  This is necessary because the hgap14.sh script   
+make use of programs and tools installed with SMRT Analysis.
+
+    > export SEYMOUR_HOME=/opt/smrtanalysis
+    > source $SEYMOUR_HOME/etc/setup.sh
+
+You can then proceed to execute the hgap14.sh script:
 
     > hgap14.sh --help
     USAGE: hgap14.sh [params] <input.xml>
