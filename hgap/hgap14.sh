@@ -126,7 +126,7 @@ input=${@:$OPTIND:1}
 p_preasm=${p_preasm="${srcdir}/params_preasm.xml"}
 p_reseq=${p_reseq="${srcdir}/params_reseq.xml"}
 
-x_opts_def="-D MAX_THREADS=60 -D HEARTBEAT_FREQ=-1"
+x_opts_def="-D MAX_THREADS=30 -D HEARTBEAT_FREQ=-1"
 [ $RUN_LOCAL -eq 0 ] && x_opts_def="${x_opts_def} --distribute"
 x_opts=${x_opts=${x_opts_def}}
 
