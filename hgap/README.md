@@ -69,6 +69,12 @@ The final output of HGAP will be located in the data/ directory:
 Notes
 -----
 
+If the assembly generates more contigs than expected and some clearly   
+overlap, you can try reducing the 'merSize' parameter in the CA spec file.   
+Most of the time this can be attributed to a small number of error in the   
+overlaps.  This can sometimes be overcome by reducing 'merSize' from 14 to    
+12 or 13.
+
 The provided xml parameter files are suitable for C2 data.  For XL data,
 you may find more success by adding --allowPartialAlignments to the 
 layoutOps section of the params_preasm.xml file.
