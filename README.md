@@ -5,4 +5,4 @@ This is a resource for learning more about PacBio data and bioinformatics analys
 
 Start here: https://github.com/PacificBiosciences/Bioinformatics-Training/wiki
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/104b77caac44b82e52bce19ad64c9c0b "githalytics.com")](http://githalytics.com/github.com/PacificBiosciences)
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/5f1b648f902ce065dba31f4dd69e79f3 "githalytics.com")](http://githalytics.com/PacificBiosciences/Bioinformatics-Training)
