@@ -1,6 +1,6 @@
 # This script is for use with SMRTPortal 2.0 modifications.csv and modifications.gff output files.
 # It reads gff3 compliant files.
-# Meredith Ashby, Khai Luong, Jonas Korlach 06/2013
+# Meredith Ashby, Khai Luong, Jonas Korlach 09/2013
 
 source("/data/BaseModFunctions.R")
 
