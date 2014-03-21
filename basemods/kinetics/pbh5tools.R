@@ -3,7 +3,13 @@ library(Hmisc)
 library(plyr)
 library(Biostrings)
 options(scipen=20)
-pdfOutPath <- "cmph5_demo/"
+pdfOutPath <- "kinetics_demo."
+
+# This tutorial is guaranteed to work with these R & library versions installed:
+#
+# R version 3.0.3 (2014-03-06)
+# ggplot2_0.9.3.1    plyr_1.8.1         Hmisc_3.14-3       
+# Biostrings_2.30.1  
 
 # The cmph.h5 file output as part of the basemod workflow has alignments for every read
 # and kinetic information for every base in those reads.
@@ -27,7 +33,7 @@ get.cmph5.Dataframe <- function(path){
   df <- data.frame(accuracy,readlength, holeNumber, instrument, movieStamp) 
   return(df)
 }
-cmph5path <- c('aligned_reads.cmp.h5')
+cmph5path <- c('kinetics/aligned_reads.cmp.h5')
 cmph5Subreads <- ldply(cmph5path, get.cmph5.Dataframe)
 
 # You can see all the cmp.h5 accessor functions here:
@@ -75,8 +81,8 @@ dev.off()
 # Let's instead load just the kinetic info from reads which align to a  window +/- 10 bases
 # around a GATC motif.  The 'GATC' from 1569-1572 will do nicely.
 
-ecoliPath <- 'ecoli_K12_MG1655.fasta'
-ecoli <- read.DNAStringSet(ecoliPath)
+ecoliPath <- 'kinetics/ecoli_K12_MG1655.fasta'
+ecoli <- readDNAStringSet(ecoliPath)
 gatcMatches <- vmatchPattern('GATC', ecoli) 
 gatcStart <- start(gatcMatches)[[1]][6] - 10  #look at just one motif in the genome
 gatcEnd <- end(gatcMatches)[[1]][6] + 10
@@ -94,8 +100,8 @@ levels(factor(gatcReads$idx))
 
 gatc <- subset(gatcReads, position >= gatcStart & position <= gatcEnd)
 
-table(gatc[for_gatc$strand==0,]$ref, gatc[gatc$strand==0,]$position)
-table(gatc[for_gatc$strand==1,]$ref, gatc[gatc$strand==1,]$position)
+table(gatc[gatc$strand==0,]$ref, gatc[gatc$strand==0,]$position)
+table(gatc[gatc$strand==1,]$ref, gatc[gatc$strand==1,]$position)
 
 # Plot ipds for the aligned bases
 # Remember that the altered ipd is on the strand *opposite* the modification event.
@@ -131,7 +137,7 @@ dev.off()
 # on the '0' strand.
 
 pos1570_meanIPDRatio <- ddply(subset(gatc, strand==1 & position==1570 & read=='T'),c("position", "strand","read"), summarize, meanIPDRatio=mean(elt))
-
+pos1570_meanIPDRatio
 
 # We can also plot the distribution of IPD Ratios at each position.  If a sample is uniformly
 # methylated at this position, there should be just one mode at the modified position.

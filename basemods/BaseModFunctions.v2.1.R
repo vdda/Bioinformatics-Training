@@ -5,6 +5,13 @@ library(ggplot2)
 #library(seqinr)
 options(scipen=20)
 
+# Version information
+#
+# R version 3.0.3 (2014-03-06)
+# ggplot2_0.9.3.1    plyr_1.8.1         Hmisc_3.14-3       
+# Biostrings_2.30.1  
+ 
+
 # Parse an attribute field from the GFF attributes field by name
 getAttributeField <- function (x, field, attrsep = ";") {
   s = strsplit(x, split = attrsep, fixed = TRUE)
@@ -124,7 +131,7 @@ labelContexts <- function(contextStrings, motifs, motifSites, labels=motifs, con
 # secondary peak for m6A. 
 
 genomeAnnotation <- function(refPath, motifs, positions, offsets=c(0)){
-  dnaSeq <- read.DNAStringSet(refPath)
+  dnaSeq <- readDNAStringSet(refPath)
   df <- data.frame()
   dnaSeqRc <- reverseComplement(dnaSeq)
   
@@ -277,7 +284,7 @@ makeCircosTracks <- function(mm, circosPrefix){
   }
 }
 makeKaryotypeFile <- function(reference, gff, circosPrefix){ 
-  sequences <- read.DNAStringSet(reference)
+  sequences <- readDNAStringSet(reference)
   seqid <- names(sequences)
   seqid <- gsub("\\|", "_", seqid)
   seqid <- gsub(",", "", seqid)

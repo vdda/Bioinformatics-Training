@@ -205,11 +205,9 @@ summary <- merge(c, meanCoverage)
 summary$fraction <- summary$nDetected/summary$nGenome
 write.table(summary, file = paste(outputPath, 'MotifSummary.csv', sep=''), quote=FALSE, sep=",", row.names=FALSE, col.names=TRUE)
 
-
-
-
-# R is a very useful tools for making nearly any type of plot.  The 'names' command reveals
+# R is a very useful tool for making nearly any type of plot.  The 'names' command reveals
 # all the information held in the dataframe 'mga' that you may be interested in further examining.
 # Check out the ggplot online manual for documentation and additional plotting options:
 # docs.ggplot2.org/current/
+# www.r-project.org
 names(mga)
