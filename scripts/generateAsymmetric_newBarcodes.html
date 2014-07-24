@@ -422,7 +422,7 @@ var fwdBarcodes = [
     [ "0384_Forward","CAGAGAGATATCTCTG" ]
     ];
 
-var revBarcodes = fwdBarcodes;
+var revBarcodes = fwdToRev(fwdBarcodes);
 
 Object.defineProperty(HTMLSelectElement.prototype, "selectedOptions", {
     get: (function() {
@@ -467,6 +467,14 @@ function selectedBarcodes(dir) {
         arr[i] = bc[selection[i].value];
     }
     return arr;
+}
+
+function fwdToRev(bcArray) {
+	var revArray = [];
+	for ( var i = 0; i < bcArray.length; i++ ) {
+		revArray[i] = [ bcArray[i][0].replace("Forward","Reverse"), bcArray[i][1] ];
+	}
+	return revArray;	
 }
 
 function fastaRecord(name,sequence) {
