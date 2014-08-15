@@ -3,6 +3,7 @@
 import sys
 import os
 import csv
+import re
 import subprocess
 from shutil import copy2
 from collections import namedtuple
@@ -191,7 +192,7 @@ class ContaminationRemover(object):
                 hit = BlasrM4._make( row )
                 if hit.pctsimilarity < self.minSimilarity:
                     continue
-                rec_id = hit.qname.split('/')[0]
+                rec_id = re.search(r'(^.+)(\/[0-9]+_[0-9]+)',hit.qname).groups()[0]
                 blasrHits[rec_id] = hit
         return blasrHits
 
