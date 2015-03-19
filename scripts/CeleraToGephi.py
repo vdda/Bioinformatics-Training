@@ -4,7 +4,7 @@ A simple script to convert Celera(R) Assembler's "best.edges" to a GEXF which ca
 check the topology of the best overlapping graph.
 
 help:
-    python CA_best_edge_to_GML.py -h
+    python CeleraToGephi.py -h
 
 Require networkx python module and Celera Assembler 8.1 in the path, defaults assume Celera Assembler was ran as part of
 a SMRT Analysis workflow 
