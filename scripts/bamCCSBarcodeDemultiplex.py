@@ -1,5 +1,3 @@
-#! /home/UNIXHOME/jharting/virtual_envs/login14/bin/python
-
 from pbcore.io import BamReader
 from pbcore.io.BarcodeH5Reader import BarcodeH5Fofn
 from pbcore.io.FastqIO import FastqWriter
